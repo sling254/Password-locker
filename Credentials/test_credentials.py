@@ -50,13 +50,25 @@ class TestCredential(unittest.TestCase):
         test_delete_credential to test if we can remove a credential from our credential list
         '''
         self.new_credential.save_credential()
-        test_credential = Credential("NickKorgoren","Better00","0714042437") #new credential
+        test_credential = Credential("Instagram","userTest","pope2020") #new credential
         test_credential.save_credential()
 
         self.new_credential.delete_credential() #Deleting a credential object
         self.assertEqual(len(Credential.credential_list),1)
 
         
+    def test_find_credential_by_account_name(self):
+        '''
+        test to check if we can find a credential by account_name and display information
+        '''
+
+        self.new_credential.save_credential()
+        test_credential = Credential("Instagram","UserTest","jnr345") #new credential
+        test_credential.save_credential()
+
+        found_credential = Credential.find_credential_by_account_name("Instagram")
+
+        self.assertEqual(found_credential.account_name,test_credential.account_name)
 
 
 
