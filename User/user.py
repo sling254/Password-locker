@@ -1,4 +1,3 @@
-#!/usr/bin/env python3.6
 class User:
     '''
     Class that creates a new instance of a user
@@ -64,6 +63,7 @@ class User:
         Method to display the user list
         '''
         return cls.user_list
+
 
 
 
