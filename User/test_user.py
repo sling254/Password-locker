@@ -29,10 +29,24 @@ class UserTestCreate(unittest.TestCase):
 
     def test_save_user(self):
         '''
-        A test to check if the the save function saves the values
+        A test to check if the the save method saves the values
         '''
         self.user.save_user()
         self.assertEqual(len(User.user_list),1)
+
+    def test_delete_user(self):
+        '''
+        A test to check if the delete method works 
+        '''
+        self.user.save_user()
+        self.new_user = User("sling","7895", "sling@mail.com")
+        self.new_user_2 = User("sling254","77895", "webd@mail.com")
+        self.new_user_2.save_user()
+        self.new_user.save_user()
+        self.new_user.delete_user()
+        self.assertEqual(len(User.user_list),2)
+
+
     
 
 
