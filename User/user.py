@@ -22,7 +22,13 @@ class User:
         '''
         save the user
         '''
-        self.user_list.append(self)
+        User.user_list.append(self)
+
+    def delete_user(self):
+        '''
+        delete user
+        '''
+        User.user_list.remove(self)
 
 
 
