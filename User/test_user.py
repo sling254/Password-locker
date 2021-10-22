@@ -56,6 +56,23 @@ class UserTestCreate(unittest.TestCase):
         found_contact = User.find_by_username("sling")
         self.assertEqual(found_contact.email,new_user.email)
 
+    def test_user_exists(self):
+        '''
+        test to check if a User  actually exits
+        '''
+        self.user.save_user()
+        new_user = User("simiyu","07145268","simiyu.gmail.com")
+        new_user.save_user()
+        user_exists = User.user_exists("emanuel")
+        self.assertTrue(user_exists)
+
+
+        
+        
+        
+
+        
+
 
 
 
