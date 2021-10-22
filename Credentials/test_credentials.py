@@ -70,6 +70,22 @@ class TestCredential(unittest.TestCase):
 
         self.assertEqual(found_credential.account_name,test_credential.account_name)
 
+    def test_credential_exists(self):
+        '''
+        test to check if we can return a Boolean if we cannot find a credential
+        '''
+
+        self.new_credential.save_credential()
+        test_credential = Credential("Instagram","UserTest","jnr345") #new credential
+        test_credential.save_credential()
+
+        credential_exists = Credential.credential_exist("Instagram")
+
+        self.assertTrue(credential_exists)
+
+    
+   
+
 
 
 
