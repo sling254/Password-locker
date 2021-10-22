@@ -33,6 +33,6 @@ class User:
 if __name__ == '__main__':
     user = User("emanuel", "12345", "e@mail.com")
     User.save_user( user)
-    print(User.user_list[0])
+    
 
 
