@@ -35,7 +35,7 @@ class User:
         '''
         Method that takes in a username and returns a user that matches that username.
         Args:
-        number:username to search for
+        number:username to search for user
         Returns:
         User  that matches the username.
         '''
@@ -43,7 +43,20 @@ class User:
             if user.username==username:
                 return user
 
-
+    @classmethod
+    def user_exists(cls,username):
+        '''
+        Method that takes in a username and returns a true if the user with that username does exist.
+        Args:
+        username:username to search for user
+        Returns:
+        Boolean value of true if the username does exist.
+        Boolean value of false if the username does not exist.
+        '''
+        for user in cls.user_list:
+            if user.username==username:
+                return True
+            return False
 
 
 
