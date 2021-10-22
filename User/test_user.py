@@ -67,7 +67,11 @@ class UserTestCreate(unittest.TestCase):
         self.assertTrue(user_exists)
 
 
-    
+    def test_display_user(self):
+        '''
+        test to check display stored users
+        '''
+        self.assertEqual(User.user_list,User.display_user())
         
         
         
