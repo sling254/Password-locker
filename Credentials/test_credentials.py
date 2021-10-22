@@ -26,12 +26,7 @@ class TestCredential(unittest.TestCase):
         self.assertEqual(self.new_credential.password,"qwerty")
 
     
-    def save_credential(self):
-        '''
-        save_credential method saves credential object into the credential_list
-        '''
-
-        Credential.credential_list.append(self)
+    
 
         
 
