@@ -25,4 +25,22 @@ class TestCredential(unittest.TestCase):
         self.assertEqual(self.new_credential.username,"k11")
         self.assertEqual(self.new_credential.password,"qwerty")
 
+    
+    def save_credential(self):
+        '''
+        save_credential method saves credential object into the credential_list
+        '''
+
+        Credential.credential_list.append(self)
+
+        
+
+
+
+
+
+    
+if __name__ == '__main__':
+    unittest.main()
+
         
