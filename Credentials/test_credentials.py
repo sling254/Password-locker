@@ -26,6 +26,15 @@ class TestCredential(unittest.TestCase):
         self.assertEqual(self.new_credential.password,"qwerty")
 
     
+    def test_save_credentials(self):
+        '''
+        test_save_multiple_contact to check if we can save multiple contact
+        objects to our contact_list
+        '''
+
+        self.new_credential.save_credential()
+        self.assertEqual(len(Credential.credential_list),1)
+
     
 
         
