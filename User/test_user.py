@@ -46,6 +46,18 @@ class UserTestCreate(unittest.TestCase):
         self.new_user.delete_user()
         self.assertEqual(len(User.user_list),2)
 
+    def test_find_by_username(self):
+        '''
+        A test to check if we can retrive a user using a username
+        '''
+        self.user.save_user()
+        new_user = User("sling","7895", "sling@mail.com")
+        new_user.save_user()
+        found_contact = User.find_by_username("sling")
+        self.assertEqual(found_contact.email,new_user.email)
+
+
+
 
     
 
