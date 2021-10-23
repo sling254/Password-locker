@@ -66,4 +66,7 @@ class Credential:
         '''
         method that returns the credential list
         '''
-        return cls.credential_list
+        list = cls.credential_list
+        for l in list:
+            print(l.__dict__)
+        
