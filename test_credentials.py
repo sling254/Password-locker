@@ -1,6 +1,6 @@
-from credentials import Credential
 import  unittest
-
+import pyperclip
+from credentials import Credential
 class TestCredential(unittest.TestCase):
     '''
     Test class that defines test cases for the credentials class behaviours.
@@ -88,7 +88,17 @@ class TestCredential(unittest.TestCase):
         '''
         method that returns a list of all credentials saved
         '''
+        
         self.assertEqual(Credential.display_credentials(),Credential.credential_list)
+
+    def test_copy_credentials(self):
+        '''
+        Test to confirm that we are copying the found credential works
+        '''
+        self.new_credential.save_credential()
+        Credential.copy_credentials("facebook")
+
+        self.assertEqual(self.new_credential.username,pyperclip.paste())
 
 
 
