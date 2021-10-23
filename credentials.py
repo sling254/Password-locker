@@ -1,3 +1,6 @@
+import pyperclip
+
+from run import find_credential
 class Credential:
     """
     a class that creates new credentials 
@@ -69,4 +72,12 @@ class Credential:
         list = cls.credential_list
         for l in list:
             print(l.__dict__)
+
+    @classmethod
+    def copy_credentials(cls ,account_name):
+        credentials_found = cls.find_credential_by_account_name(account_name)
+        pyperclip.copy(credentials_found.username,credentials_found.password)
+
+
+    
         
