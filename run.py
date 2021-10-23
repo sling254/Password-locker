@@ -79,6 +79,19 @@ def display_credentials():
   '''
   return Credential.display_credentials()
 
+def copy_username(account_name):
+  '''
+  Function that copies saved users
+  '''
+  return Credential.copy_username(account_name)
+
+def copy_password(account_name):
+  '''
+  Function that copies saved password
+  '''
+  return Credential.copy_password(account_name)
+
+
 
 # A function to generate password
 def pass_gen():
@@ -94,7 +107,7 @@ def pass_gen():
         continue
     else:
       password = ("".join(password))
-      return password 
+      return f" '{password}' "
   
 
 
@@ -199,6 +212,35 @@ def main():
         print("Credential deleted successfully")
       else:
         print("That account name does not exist")
+
+      #copy password 
+    if short_code == 'copy-user':
+
+      print("Enter the Account name to copy the Username ")
+
+      search_credential = input()
+      print("-"*10)
+      print("-"*60)
+      if check_existing_credential(search_credential):
+        search_credential = copy_username(search_credential)
+        print("Username copied successfully")
+
+      else:
+        print("That user does not exist")
+
+    if short_code == 'copy-pas':
+
+      print("Enter the Account name to copy the Password ")
+
+      search_credential = input()
+      print("-"*10)
+      print("-"*60)
+      if check_existing_credential(search_credential):
+        search_credential = copy_password(search_credential)
+        print("Password copied successfully")
+
+      else:
+        print("That Account does not exist")
 
 
       
