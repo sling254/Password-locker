@@ -2,6 +2,12 @@
 from user import User
 from credentials import Credential
 import string, random
+from rich import print 
+from rich.console import Console
+from rich.table import Table
+from rich.progress import track
+from time import sleep
+
 
 #functions for user_account
 def create_user(username,password,email):
@@ -93,6 +99,7 @@ def copy_password(account_name):
 
 
 
+
 # A function to generate password
 def pass_gen():
   print("+++++++++++++++++++++++++++++++")
@@ -100,7 +107,7 @@ def pass_gen():
   phrase = string.digits + string.ascii_lowercase + string.ascii_uppercase + string.punctuation
   while True:
     try:
-        length = int(input("please Key in the lenght of the password you need: "))
+        length = int(input(">>> please Key in the lenght of the password you need: "))
         password = random.sample(phrase, length)
     except ValueError:
         print("You did not key in a valid number")
@@ -108,139 +115,222 @@ def pass_gen():
     else:
       password = ("".join(password))
       return f" '{password}' "
-  
 
+#Function to display command to the user  
+def display_commands():
+  console = Console()
+  table = Table(show_header=True, header_style="bold magenta")
+  table.add_column("Short Code")
+  table.add_column("Use for")
+  table.add_row(
+      "display-c", 
+      "To display all saved accounts"
+  )
+  table.add_row(
+    "delete-c",
+    "To delete saved credentials"
+  )
+  table.add_row(
+    "copy-user",
+    "To copy a user to the clipboard"
+  )
+  table.add_row(
+    "copy-pass",
+    "To copy a password to the clipboard"
+  )
+  table.add_row(
+    "exit",
+    "To exit the program"
+  )
+  console.print(table)
+  print("-"*60)
 
 def main():
-  print("Hello, Welcome to your password locker account \n")
-  print("short_codes to help you around: to create an account use: cc \n")
+  print("[bold blue] >>> Hello, Welcome to your password locker  <<< \n")
+  for step in track(range(30), description="Setting up..."):
+          sleep(0.1)
+  print(">>> To use this service you have to setup an account")
+  console = Console()
+  table = Table(show_header=True, header_style="bold magenta")
+  table.add_column("Short Code")
+  table.add_column("Use for")
+  table.add_row(
+      "cc ", 
+      "To create an account this will take a second"
+  )  
+  console.print(table)
+  print("-"*60)
 
   while True:
     short_code = input().lower()
-
     #user creating own password
     if short_code == 'cc':
-      print("New user Account")
+      print(">>> New user Account <<<")
       print("-"*10)
 
-      print ("Enter your a preferred username ....")
+      print (">>> Enter a preferred username ....")
       username = input()
       print("-"*10)
-      print ("Enter password  ....")
+      print (">>> Enter password  ....")
       password = input()
       print("-"*10)
 
-      print ("Enter your email address ....")
+      print (">>> Enter your email address ....")
       email = input()
       print("-"*10)
       print("-"*10)
-
     
       save_user(create_user(username, password,email)) #create and save user
-      print(f"New user created with \n User name -- {username} \n User Email -- {email} ")
+      print(f">>> New user created with \n [bold green] User name -- {username} \n User Email -- [bold green]{email} ")
       print("-"*70)
+      print(f">>> Please proceed to login in ")
+      console = Console()
+      table = Table(show_header=True, header_style="bold magenta")
+      table.add_column("Short Code")
+      table.add_column("Use for")
+      table.add_row(
+          "login", 
+          "To login to an account"
+      )  
+      console.print(table)
+      print("-"*60)
       
-      print("Enter command login -to login to your account \n")
     #Login code
     if short_code == 'login':
-      print("Welcome to login Interface")
-      print("Enter your username")
+      print(">>> [bold blue]Welcome to login Interface <<<")
+      print(">>> Enter your username")
       input_user_name = input()
-
-      print("Enter your password")
-      input_user_password = input()
-      print("-"*10)
+      print(">>> Enter your password")
+      input_user_password = input()      
+      for step in track(range(5), description="Checking your credentials..."):
+          sleep(0.1)
       print("-"*60)
       if  input_user_name != username or input_user_password != password:
-        print("ACCESS DENIED!!")
-        print("Invalid username or password!!!!")
-        print("Try again")
-        print("\/"*20)
-        print("Enter command login to re-try login to your account \n")
+        print(">>> [bold red] ACCESS DENIED!! [/bold red] <<<")
+        print(">>> Invalid username or password!!!!")
+        print(" >>> Try again")
+        print("[bold red]\_/"*20)
+        console = Console()
+        table = Table(show_header=True, header_style="bold magenta")
+        table.add_column("Short Code")
+        table.add_column("Use for")
+        table.add_row(
+            "login", 
+            "To re-try login"
+        )
+        console.print(table)
+        print("-"*60) 
             
       else:
-        print("ACCESS GRANTED!!")
-        print(f"Welcome {username} {email} to your account")
-        print("Option 1 >>> To save account credentials for account that exists  use code * ca *")
-        print("Option 2 >>> To save account credentials for account you wish to create and have a password generated for you use code * ca-g *")
+        print(">>> [bold green] ACCESS GRANTED!! <<<")
+        print(f"Welcome [bold green] >>> {username} <<< {email} [/bold green] to your account")
+        console = Console()
+        table = Table(show_header=True, header_style="bold magenta")
+        table.add_column("Short Codes")
+        table.add_column("Use for")
+        table.add_row(
+            "ca", 
+            "To save account credentials for account that exists"
+        )
+        table.add_row(
+          "ca-g",
+          "To save account credentials for account you wish to create and have a password generated for you use code"
+        )
+        console.print(table)
+        print("-"*60) 
     if short_code == 'ca':             
-        print ("Enter your a account name you wish to store credentials for ....")
+        print (">>> Enter your a account name you wish to store credentials for ....")
         acc_name = input()
         print("-"*10)
-        print ("Enter your username for the  account ....")
+        print (">>> Enter your username for the  account ....")
         acc_username = input()
         print("-"*10)
-        print ("Enter Password for the  account ....")
+        print (">>> Enter Password for the  account ....")
         password = input()
         print("-"*10)
         save_credential(create_credential(acc_name, acc_username,password)) #
-        print("Thank you for using our service")
+        print(">>> [bold blue]Thank you for using our service")
         print("-"*70)
-        print("To view your credentials account credentials use code * display-c * to display all saved accounts")
+        #Function to display command to the user
+        display_commands()
+        
 
     if short_code == 'ca-g':
-      print ("Enter your a account name you wish to store credentials for ....")
+      print (">>> Enter your a account name you wish to store credentials for ....")
       acc_name = input()
       print("-"*10)
-      print ("Enter your username for the  account ....")
+      print (">>> Enter your username for the  account ....")
       acc_username = input()
       print("-"*10)
-      print ("Enter Password for the  account ....")
+      print (">>> Enter Password for the  account ....")
       password=pass_gen()
       print(f">>>> you password is {password}")
       print("-"*10)
       save_credential(create_credential(acc_name, acc_username,password)) #
-      print("Thank you for using our service")
+      print(">>>[bold blue] Thank you for using our service")
       print("-"*70)
+      #Function to display command to the user
+      display_commands()
 
     if short_code == "display-c":
       print("-"*70)
-      display_credentials()
-      print("Here is a list of all your credentials")
+      print(">>> Here is a list of all your credentials")
+      display_credentials()      
       print("-"*70)
-      print("To delete credental account use code * delete-c * ")
+      #Function to display command to the user
+      display_commands()
 
     if short_code == "delete-c":
-      print("Enter the account-name you want to delete  ")
+      print(">>> Enter the account-name you want to delete  ")
       delete_acc = input()
       print("-"*10)
       print("-"*60)
       if check_existing_credential(delete_acc):
         dl_acc = find_credential(delete_acc)
-        print(f"<<{dl_acc.account_name}>> with Username <<{dl_acc.username}>> will be deleted")
+        print(f"<< {dl_acc.account_name} >> with Username << {dl_acc.username} >> will be deleted")
         dl_acc = del_credential(dl_acc)
-        print("Credential deleted successfully")
+        print(">>> [bold green]Credential deleted successfully")
       else:
-        print("That account name does not exist")
+        print("[bold red]That account name does not exist")
+      #Function to display command to the user
+      display_commands()
 
       #copy password 
     if short_code == 'copy-user':
 
-      print("Enter the Account name to copy the Username ")
+      print(">>> Enter the Account name to copy the Username ")
 
       search_credential = input()
       print("-"*10)
       print("-"*60)
       if check_existing_credential(search_credential):
         search_credential = copy_username(search_credential)
-        print("Username copied successfully")
+        print("[bold green]Username copied successfully")
 
       else:
-        print("That user does not exist")
+        print("[bold red]That Account-name does not exist")
+      #Function to display command to the user
+      display_commands()
 
-    if short_code == 'copy-pas':
+    if short_code == 'copy-pass':
 
-      print("Enter the Account name to copy the Password ")
+      print(">>> Enter the Account name to copy the Password ")
 
       search_credential = input()
       print("-"*10)
       print("-"*60)
       if check_existing_credential(search_credential):
         search_credential = copy_password(search_credential)
-        print("Password copied successfully")
+        print("[bold green]Password copied successfully")
 
       else:
-        print("That Account does not exist")
+        print("[bold red]That Account does not exist")
+      #Function to display command to the user
+      display_commands()
+
+    if short_code == "exit":
+      print(f">>> Thank you for using our service we hope to see you back soon'")
+      break
 
 
       
