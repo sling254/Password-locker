@@ -167,14 +167,12 @@ def main():
     if short_code == 'cc':
       print(">>> New user Account <<<")
       print("-"*10)
-
       print (">>> Enter a preferred username ....")
       username = input()
       print("-"*10)
       print (">>> Enter password  ....")
       password = input()
       print("-"*10)
-
       print (">>> Enter your email address ....")
       email = input()
       print("-"*10)
@@ -332,18 +330,7 @@ def main():
       print(f">>> Thank you for using our service we hope to see you back soon'")
       break
 
-
-      
-      
-          
-
-
-
-
-      
-
-   
-
+  
 if __name__ == '__main__':
 
   main()
